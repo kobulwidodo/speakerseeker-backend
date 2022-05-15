@@ -1,8 +1,8 @@
 package http
 
 import (
-	"go-template/domain"
-	"go-template/utils"
+	"speakerseeker-backend/domain"
+	"speakerseeker-backend/utils"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

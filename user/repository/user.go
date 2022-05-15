@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"go-template/domain"
+	"speakerseeker-backend/domain"
 
 	"gorm.io/gorm"
 )

@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"errors"
-	"go-template/utils"
+	"speakerseeker-backend/utils"
 	"net/http"
 	"os"
 	"strings"

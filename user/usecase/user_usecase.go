@@ -2,8 +2,8 @@ package usecase
 
 import (
 	"errors"
-	"go-template/domain"
-	"go-template/middleware"
+	"speakerseeker-backend/domain"
+	"speakerseeker-backend/middleware"
 
 	"golang.org/x/crypto/bcrypt"
 )

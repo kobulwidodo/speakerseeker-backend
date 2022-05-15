@@ -1,9 +1,9 @@
 version: "3.9"
 services:
-  postgis:
+  postgres:
     image: postgres:13
     volumes:
-      - ./data/postgis:/var/lib/postgresql/data
+      - ./data/postgres:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: template

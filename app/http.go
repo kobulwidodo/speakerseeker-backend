@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"go-template/domain"
-	_userHttpHandler "go-template/user/delivery/http"
-	_userRepository "go-template/user/repository"
-	_userUsecase "go-template/user/usecase"
+	"speakerseeker-backend/domain"
+	_userHttpHandler "speakerseeker-backend/user/delivery/http"
+	_userRepository "speakerseeker-backend/user/repository"
+	_userUsecase "speakerseeker-backend/user/usecase"
 	"log"
 	"os"
 

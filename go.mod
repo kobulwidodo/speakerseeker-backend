@@ -1,4 +1,4 @@
-module go-template
+module speakerseeker-backend
 
 go 1.16
 
