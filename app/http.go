@@ -2,12 +2,15 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 	"speakerseeker-backend/domain"
+	_speakerHttpHandler "speakerseeker-backend/speaker/delivery/http"
+	_speakerRepository "speakerseeker-backend/speaker/repository/postgresql"
+	_speakerUsecase "speakerseeker-backend/speaker/usecase"
 	_userHttpHandler "speakerseeker-backend/user/delivery/http"
 	_userRepository "speakerseeker-backend/user/repository"
 	_userUsecase "speakerseeker-backend/user/usecase"
-	"log"
-	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -30,10 +33,13 @@ func main() {
 	api := r.Group("/api")
 
 	userRepository := _userRepository.NewUserRepository(db)
+	speakerRepository := _speakerRepository.NewSpeakerRepository(db)
 
 	userUseCase := _userUsecase.NewUserUseCase(userRepository)
+	speakerUseCase := _speakerUsecase.NewSpeakserUsecase(speakerRepository)
 
 	_userHttpHandler.NewUserHandler(api, userUseCase)
+	_speakerHttpHandler.NewSpeakerHandler(api, speakerUseCase)
 
 	r.Run()
 }
@@ -52,7 +58,7 @@ func initDb() (*gorm.DB, error) {
 		return db, err
 	}
 
-	if err := db.AutoMigrate(&domain.User{}); err != nil {
+	if err := db.AutoMigrate(&domain.User{}, &domain.Speaker{}); err != nil {
 		return nil, err
 	}
 
