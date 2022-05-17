@@ -23,8 +23,7 @@ import (
 
 func main() {
 	if err := godotenv.Load(); err != nil {
-		log.Fatal("failed to load env")
-		panic(err)
+		fmt.Println("failed to load env from local file")
 	}
 
 	db, err := initDb()
