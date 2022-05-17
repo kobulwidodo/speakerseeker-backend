@@ -24,7 +24,7 @@ func (r *SpeakerRepository) FindAll() ([]domain.Speaker, error) {
 
 func (r *SpeakerRepository) FindOne(id uint) (domain.Speaker, error) {
 	var speaker domain.Speaker
-	if err := r.db.Preload("SpeakerSkills").Preload("SpeakerCareers").Where("id = ?", id).First(&speaker).Error; err != nil {
+	if err := r.db.Preload("SpeakerSkills").Preload("SpeakerCareers").Preload("SpeakerExperiences").Where("id = ?", id).First(&speaker).Error; err != nil {
 		return speaker, err
 	}
 	return speaker, nil
