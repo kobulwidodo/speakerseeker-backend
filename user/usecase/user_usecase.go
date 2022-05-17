@@ -22,9 +22,9 @@ func (u *UserUseCase) SignUp(input *domain.UserSignUp) error {
 		return err
 	}
 	user := domain.User{
-		Name:     input.Name,
-		Email:    input.Email,
-		Password: string(hash),
+		OrganizationName: input.OrganizationName,
+		Email:            input.Email,
+		Password:         string(hash),
 	}
 	if err := u.UserRepository.Create(user); err != nil {
 		return err
