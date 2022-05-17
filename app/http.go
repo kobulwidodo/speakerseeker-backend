@@ -64,7 +64,7 @@ func initDb() (*gorm.DB, error) {
 		return db, err
 	}
 
-	if err := db.AutoMigrate(&domain.User{}, &domain.Speaker{}, &domain.SpeakerSkill{}); err != nil {
+	if err := db.AutoMigrate(&domain.User{}, &domain.Speaker{}, &domain.SpeakerSkill{}, &domain.SpeakerCareer{}); err != nil {
 		return nil, err
 	}
 
