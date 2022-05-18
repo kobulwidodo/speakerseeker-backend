@@ -16,6 +16,7 @@ import (
 	_userRepository "speakerseeker-backend/user/repository"
 	_userUsecase "speakerseeker-backend/user/usecase"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
@@ -33,6 +34,12 @@ func main() {
 		panic(err)
 	}
 	r := gin.Default()
+	r.Use(cors.New(cors.Config{
+		AllowAllOrigins:  true,
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:     []string{"Origin", "Authorization", "Content-Type"},
+		AllowCredentials: true,
+	}))
 	api := r.Group("/api")
 
 	jwtMiddleware := middleware.NewAuthMiddleware()
