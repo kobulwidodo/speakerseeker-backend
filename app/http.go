@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"speakerseeker-backend/domain"
+	"speakerseeker-backend/middleware"
 	_speakerHttpHandler "speakerseeker-backend/speaker/delivery/http"
 	_speakerRepository "speakerseeker-backend/speaker/repository/postgresql"
 	_speakerUsecase "speakerseeker-backend/speaker/usecase"
@@ -34,6 +35,8 @@ func main() {
 	r := gin.Default()
 	api := r.Group("/api")
 
+	jwtMiddleware := middleware.NewAuthMiddleware()
+
 	userRepository := _userRepository.NewUserRepository(db)
 	speakerRepository := _speakerRepository.NewSpeakerRepository(db)
 	speakerSkillRepository := _speakerSkillRepository.NewSpeakerSkillRepository(db)
@@ -42,7 +45,7 @@ func main() {
 	speakerUseCase := _speakerUsecase.NewSpeakserUsecase(speakerRepository)
 	speakerSkillUseCase := _speakerSkillUsecase.NewSpeakerSkillUsecase(speakerSkillRepository)
 
-	_userHttpHandler.NewUserHandler(api, userUseCase)
+	_userHttpHandler.NewUserHandler(api, userUseCase, jwtMiddleware)
 	_speakerHttpHandler.NewSpeakerHandler(api, speakerUseCase)
 	_speakerSkillHttpHandler.NewSpeakerSkillHandler(api, speakerSkillUseCase)
 
