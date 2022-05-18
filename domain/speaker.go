@@ -8,6 +8,7 @@ type Speaker struct {
 	HeaderTitle        string              `json:"header_title"`
 	Header             string              `json:"header"`
 	About              string              `gorm:"text" json:"about"`
+	Location           string              `json:"location"`
 	VirtualFeeStart    int32               `json:"virtual_fee_start"`
 	VirtualFeeStop     int32               `json:"virtual_fee_stop"`
 	SiteFeeStart       int32               `json:"site_fee_start"`
