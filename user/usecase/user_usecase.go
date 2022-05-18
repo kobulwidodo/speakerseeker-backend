@@ -54,3 +54,11 @@ func (u *UserUseCase) SignIn(input *domain.UserSignIn) (string, error) {
 
 	return token, nil
 }
+
+func (u *UserUseCase) GetMe(id uint) (domain.User, error) {
+	user, err := u.UserRepository.GetById(id)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}

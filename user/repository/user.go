@@ -30,3 +30,11 @@ func (r *userRepository) GetByEmail(email string) (domain.User, error) {
 
 	return user, nil
 }
+
+func (r *userRepository) GetById(id uint) (domain.User, error) {
+	var user domain.User
+	if err := r.db.Where("id = ?", id).Find(&user).Error; err != nil {
+		return user, err
+	}
+	return user, nil
+}
