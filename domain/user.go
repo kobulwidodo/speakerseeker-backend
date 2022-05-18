@@ -6,17 +6,19 @@ type User struct {
 	gorm.Model
 	Email            string `gorm:"unique"`
 	OrganizationName string
-	Password         string
+	Password         string `json:"-"`
 }
 
 type UserRepository interface {
 	Create(user User) error
 	GetByEmail(email string) (User, error)
+	GetById(id uint) (User, error)
 }
 
 type UserUseCase interface {
 	SignUp(input *UserSignUp) error
 	SignIn(input *UserSignIn) (string, error)
+	GetMe(id uint) (User, error)
 }
 
 type UserSignUp struct {
