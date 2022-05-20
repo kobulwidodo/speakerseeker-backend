@@ -41,6 +41,7 @@ func main() {
 		AllowCredentials: true,
 	}))
 	api := r.Group("/api")
+	api.Static("/images", "./images")
 
 	jwtMiddleware := middleware.NewAuthMiddleware()
 
