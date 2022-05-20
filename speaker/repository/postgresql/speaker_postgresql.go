@@ -14,9 +14,10 @@ func NewSpeakerRepository(db *gorm.DB) domain.SpekaerRepository {
 	return &SpeakerRepository{db}
 }
 
-func (r *SpeakerRepository) FindAll() ([]domain.Speaker, error) {
+func (r *SpeakerRepository) FindAll(query string) ([]domain.Speaker, error) {
 	var speakers []domain.Speaker
-	if err := r.db.Preload("SpeakerSkills").Find(&speakers).Error; err != nil {
+	queryFix := "%" + query + "%"
+	if err := r.db.Preload("SpeakerSkills").Where("name ILIKE ?", queryFix).Find(&speakers).Error; err != nil {
 		return speakers, err
 	}
 	return speakers, nil

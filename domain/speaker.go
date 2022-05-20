@@ -23,12 +23,12 @@ type Speaker struct {
 }
 
 type SpekaerRepository interface {
-	FindAll() ([]Speaker, error)
+	FindAll(query string) ([]Speaker, error)
 	FindOne(id uint) (Speaker, error)
 }
 
 type SpeakerUsecase interface {
-	GetAll() ([]Speaker, error)
+	GetAll(query string) ([]Speaker, error)
 	GetById(id uint) (Speaker, error)
 }
 

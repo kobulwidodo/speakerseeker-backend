@@ -22,7 +22,8 @@ func NewSpeakerHandler(r *gin.RouterGroup, su domain.SpeakerUsecase) {
 }
 
 func (h *SpeakerHandler) GetAll(c *gin.Context) {
-	speakers, err := h.speakerUsecase.GetAll()
+	query := c.DefaultQuery("name", "")
+	speakers, err := h.speakerUsecase.GetAll(query)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, utils.NewFailResponse(err.Error()))
 		return

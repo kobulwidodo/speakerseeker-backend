@@ -11,8 +11,8 @@ func NewSpeakserUsecase(sr domain.SpekaerRepository, ssr domain.SpeakerSkillRepo
 	return &SpeakerUsecase{speakerRepository: sr, speakerSkillRepository: ssr}
 }
 
-func (u *SpeakerUsecase) GetAll() ([]domain.Speaker, error) {
-	speakers, err := u.speakerRepository.FindAll()
+func (u *SpeakerUsecase) GetAll(query string) ([]domain.Speaker, error) {
+	speakers, err := u.speakerRepository.FindAll(query)
 	if err != nil {
 		return speakers, err
 	}
