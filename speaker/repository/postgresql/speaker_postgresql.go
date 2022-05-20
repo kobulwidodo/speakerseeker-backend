@@ -16,7 +16,7 @@ func NewSpeakerRepository(db *gorm.DB) domain.SpekaerRepository {
 
 func (r *SpeakerRepository) FindAll() ([]domain.Speaker, error) {
 	var speakers []domain.Speaker
-	if err := r.db.Find(&speakers).Error; err != nil {
+	if err := r.db.Preload("SpeakerSkills").Find(&speakers).Error; err != nil {
 		return speakers, err
 	}
 	return speakers, nil
