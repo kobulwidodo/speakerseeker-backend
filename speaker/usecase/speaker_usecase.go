@@ -3,11 +3,12 @@ package usecase
 import "speakerseeker-backend/domain"
 
 type SpeakerUsecase struct {
-	speakerRepository domain.SpekaerRepository
+	speakerRepository      domain.SpekaerRepository
+	speakerSkillRepository domain.SpeakerSkillRepository
 }
 
-func NewSpeakserUsecase(sr domain.SpekaerRepository) domain.SpeakerUsecase {
-	return &SpeakerUsecase{speakerRepository: sr}
+func NewSpeakserUsecase(sr domain.SpekaerRepository, ssr domain.SpeakerSkillRepository) domain.SpeakerUsecase {
+	return &SpeakerUsecase{speakerRepository: sr, speakerSkillRepository: ssr}
 }
 
 func (u *SpeakerUsecase) GetAll() ([]domain.Speaker, error) {

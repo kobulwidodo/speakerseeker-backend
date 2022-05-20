@@ -49,7 +49,7 @@ func main() {
 	speakerSkillRepository := _speakerSkillRepository.NewSpeakerSkillRepository(db)
 
 	userUseCase := _userUsecase.NewUserUseCase(userRepository)
-	speakerUseCase := _speakerUsecase.NewSpeakserUsecase(speakerRepository)
+	speakerUseCase := _speakerUsecase.NewSpeakserUsecase(speakerRepository, speakerSkillRepository)
 	speakerSkillUseCase := _speakerSkillUsecase.NewSpeakerSkillUsecase(speakerSkillRepository)
 
 	_userHttpHandler.NewUserHandler(api, userUseCase, jwtMiddleware)
