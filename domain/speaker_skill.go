@@ -10,6 +10,7 @@ type SpeakerSkill struct {
 
 type SpeakerSkillRepository interface {
 	FindBySpeakerId(id uint) ([]SpeakerSkill, error)
+	FindPluck(id uint) ([]string, error)
 }
 
 type SpeakerSkillUsecase interface {

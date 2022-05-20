@@ -21,3 +21,11 @@ func (r *SpeakerSkillRepository) FindBySpeakerId(id uint) ([]domain.SpeakerSkill
 	}
 	return skills, nil
 }
+
+func (r *SpeakerSkillRepository) FindPluck(id uint) ([]string, error) {
+	var skills []string
+	if err := r.db.Where("speaker_id = ?", id).Pluck("title", &skills).Error; err != nil {
+		return skills, err
+	}
+	return skills, nil
+}
