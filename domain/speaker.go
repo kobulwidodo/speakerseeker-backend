@@ -15,8 +15,10 @@ type Speaker struct {
 	SiteFeeStop        int32               `json:"site_fee_stop"`
 	Tiktok             string              `json:"tiktok"`
 	Instagram          string              `json:"instagram"`
-	Linkedin           string              `json:"linkedid"`
+	Linkedin           string              `json:"linkedin"`
 	ImgPath            string              `json:"img_path"`
+	ImgProfilePath     string              `json:"img_profile_path"`
+	ImgReviewPath      string              `json:"img_review_path"`
 	SpeakerSkills      []SpeakerSkill      `json:"speaker_skills"`
 	SpeakerCareers     []SpeakerCareer     `json:"speaker_careers"`
 	SpeakerExperiences []SpeakerExperience `json:"speaker_experiences"`
