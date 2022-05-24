@@ -22,9 +22,10 @@ type Speaker struct {
 	SpeakerSkills      []SpeakerSkill      `json:"speaker_skills"`
 	SpeakerCareers     []SpeakerCareer     `json:"speaker_careers"`
 	SpeakerExperiences []SpeakerExperience `json:"speaker_experiences"`
+	Transactions       []Transaction       `json:"transaction"`
 }
 
-type SpekaerRepository interface {
+type SpeakerRepository interface {
 	FindAll(query string) ([]Speaker, error)
 	FindOne(id uint) (Speaker, error)
 }
