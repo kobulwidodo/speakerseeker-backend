@@ -21,7 +21,7 @@ func (u *MidtransTransactionUsecase) Handler(id string) error {
 		return err
 	}
 	idInt, _ := strconv.Atoi(id)
-	mTrx, err := u.midtransTransactionRepository.GetById(uint(idInt))
+	mTrx, err := u.midtransTransactionRepository.GetByTrxId(uint(idInt))
 	if err != nil {
 		return err
 	}
