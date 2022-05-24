@@ -18,6 +18,7 @@ type MidtransTransaction struct {
 type MidtransTransactionRepository interface {
 	Create(midtransTrx MidtransTransaction) error
 	GetById(id uint) (MidtransTransaction, error)
+	GetByTrxId(id uint) (MidtransTransaction, error)
 	Update(mtrx MidtransTransaction) error
 }
 

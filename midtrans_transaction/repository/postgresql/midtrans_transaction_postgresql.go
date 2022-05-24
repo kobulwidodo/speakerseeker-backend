@@ -29,6 +29,14 @@ func (r *MidtransTransactionRepository) GetById(id uint) (domain.MidtransTransac
 	return mTrx, nil
 }
 
+func (r *MidtransTransactionRepository) GetByTrxId(id uint) (domain.MidtransTransaction, error) {
+	var mTrx domain.MidtransTransaction
+	if err := r.db.Where("transaction_id = ?", id).Find(&mTrx).Error; err != nil {
+		return mTrx, err
+	}
+	return mTrx, nil
+}
+
 func (r *MidtransTransactionRepository) Update(mtrx domain.MidtransTransaction) error {
 	if err := r.db.Save(&mtrx).Error; err != nil {
 		return err
