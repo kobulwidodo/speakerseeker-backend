@@ -6,7 +6,8 @@ type User struct {
 	gorm.Model
 	Email            string `gorm:"unique"`
 	OrganizationName string
-	Password         string `json:"-"`
+	Password         string        `json:"-"`
+	Transactions     []Transaction `json:"transactions"`
 }
 
 type UserRepository interface {
