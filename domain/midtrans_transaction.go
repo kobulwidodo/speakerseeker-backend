@@ -17,7 +17,10 @@ type MidtransTransaction struct {
 
 type MidtransTransactionRepository interface {
 	Create(midtransTrx MidtransTransaction) error
+	GetById(id uint) (MidtransTransaction, error)
+	Update(mtrx MidtransTransaction) error
 }
 
 type MidtransTransactionUsecase interface {
+	Handler(id string) error
 }

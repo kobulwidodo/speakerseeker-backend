@@ -20,3 +20,18 @@ func (r *MidtransTransactionRepository) Create(midtransTrx domain.MidtransTransa
 	}
 	return nil
 }
+
+func (r *MidtransTransactionRepository) GetById(id uint) (domain.MidtransTransaction, error) {
+	var mTrx domain.MidtransTransaction
+	if err := r.db.Where("id = ?", id).Find(&mTrx).Error; err != nil {
+		return mTrx, err
+	}
+	return mTrx, nil
+}
+
+func (r *MidtransTransactionRepository) Update(mtrx domain.MidtransTransaction) error {
+	if err := r.db.Save(&mtrx).Error; err != nil {
+		return err
+	}
+	return nil
+}

@@ -58,3 +58,14 @@ func (c *CoreApi) CreateOrder(orderId uint, speakerId uint, speakerName string, 
 	coreApiRes, _ := c.ca.ChargeTransaction(chargeReq)
 	return coreApiRes, nil
 }
+
+func (c *CoreApi) HandleNotification(id string) (*coreapi.TransactionStatusResponse, error) {
+	c.ca.New(os.Getenv("MIDTRANS_SERVER_KEY"), midtrans.Sandbox)
+
+	midtransReport, err := c.ca.CheckTransaction(id)
+	if err != nil {
+		return midtransReport, err
+	}
+
+	return midtransReport, nil
+}
