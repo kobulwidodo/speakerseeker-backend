@@ -10,7 +10,7 @@ type SpeakerRepository struct {
 	db *gorm.DB
 }
 
-func NewSpeakerRepository(db *gorm.DB) domain.SpekaerRepository {
+func NewSpeakerRepository(db *gorm.DB) domain.SpeakerRepository {
 	return &SpeakerRepository{db}
 }
 
