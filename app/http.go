@@ -7,7 +7,9 @@ import (
 	"speakerseeker-backend/domain"
 	"speakerseeker-backend/infrastructure"
 	"speakerseeker-backend/middleware"
+	_midtransTransactionHandler "speakerseeker-backend/midtrans_transaction/delivery/http"
 	_midtransTransactionRepository "speakerseeker-backend/midtrans_transaction/repository/postgresql"
+	_midtransTransactionUsecase "speakerseeker-backend/midtrans_transaction/usecase"
 	_speakerHttpHandler "speakerseeker-backend/speaker/delivery/http"
 	_speakerRepository "speakerseeker-backend/speaker/repository/postgresql"
 	_speakerUsecase "speakerseeker-backend/speaker/usecase"
@@ -61,11 +63,13 @@ func main() {
 	speakerUseCase := _speakerUsecase.NewSpeakserUsecase(speakerRepository, speakerSkillRepository)
 	speakerSkillUseCase := _speakerSkillUsecase.NewSpeakerSkillUsecase(speakerSkillRepository)
 	transactionUsecase := _transactionUsecase.NewTransactionUsecase(transactionRepository, midtransTransactionRepository, speakerRepository, &midtransDriver)
+	midtransTransactionUsecase := _midtransTransactionUsecase.NewMidtransTransactionUsecase(midtransTransactionRepository, &midtransDriver)
 
 	_userHttpHandler.NewUserHandler(api, userUseCase, jwtMiddleware)
 	_speakerHttpHandler.NewSpeakerHandler(api, speakerUseCase)
 	_speakerSkillHttpHandler.NewSpeakerSkillHandler(api, speakerSkillUseCase)
 	_transactionHttpHandler.NewTransactionHandler(api, transactionUsecase, jwtMiddleware)
+	_midtransTransactionHandler.NewMidtransTransactionHandler(api, midtransTransactionUsecase)
 
 	r.Run()
 }
