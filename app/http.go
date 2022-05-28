@@ -10,6 +10,9 @@ import (
 	_midtransTransactionHandler "speakerseeker-backend/midtrans_transaction/delivery/http"
 	_midtransTransactionRepository "speakerseeker-backend/midtrans_transaction/repository/postgresql"
 	_midtransTransactionUsecase "speakerseeker-backend/midtrans_transaction/usecase"
+	_ratingHandler "speakerseeker-backend/rating/delivery/http"
+	_ratingRepository "speakerseeker-backend/rating/repository/postgresql"
+	_ratingUsecase "speakerseeker-backend/rating/usecase"
 	_speakerHttpHandler "speakerseeker-backend/speaker/delivery/http"
 	_speakerRepository "speakerseeker-backend/speaker/repository/postgresql"
 	_speakerUsecase "speakerseeker-backend/speaker/usecase"
@@ -58,18 +61,21 @@ func main() {
 	speakerSkillRepository := _speakerSkillRepository.NewSpeakerSkillRepository(db)
 	transactionRepository := _transactionRepository.NewTransactionRepository(db)
 	midtransTransactionRepository := _midtransTransactionRepository.NewMidtransTransactionRepository(db)
+	ratingRepository := _ratingRepository.NewRatingRepository(db)
 
 	userUseCase := _userUsecase.NewUserUseCase(userRepository)
 	speakerUseCase := _speakerUsecase.NewSpeakserUsecase(speakerRepository, speakerSkillRepository)
 	speakerSkillUseCase := _speakerSkillUsecase.NewSpeakerSkillUsecase(speakerSkillRepository)
 	transactionUsecase := _transactionUsecase.NewTransactionUsecase(transactionRepository, midtransTransactionRepository, speakerRepository, &midtransDriver)
 	midtransTransactionUsecase := _midtransTransactionUsecase.NewMidtransTransactionUsecase(midtransTransactionRepository, &midtransDriver)
+	ratingUsecase := _ratingUsecase.NewRatingUsecase(ratingRepository)
 
 	_userHttpHandler.NewUserHandler(api, userUseCase, jwtMiddleware)
 	_speakerHttpHandler.NewSpeakerHandler(api, speakerUseCase)
 	_speakerSkillHttpHandler.NewSpeakerSkillHandler(api, speakerSkillUseCase)
 	_transactionHttpHandler.NewTransactionHandler(api, transactionUsecase, jwtMiddleware)
 	_midtransTransactionHandler.NewMidtransTransactionHandler(api, midtransTransactionUsecase)
+	_ratingHandler.NewRatingHandler(api, ratingUsecase, jwtMiddleware)
 
 	r.Run()
 }
@@ -89,7 +95,7 @@ func initDb() (*gorm.DB, error) {
 		return db, err
 	}
 
-	if err := db.AutoMigrate(&domain.User{}, &domain.Speaker{}, &domain.SpeakerSkill{}, &domain.SpeakerCareer{}, &domain.SpeakerExperience{}, &domain.Transaction{}, &domain.MidtransTransaction{}); err != nil {
+	if err := db.AutoMigrate(&domain.User{}, &domain.Speaker{}, &domain.SpeakerSkill{}, &domain.SpeakerCareer{}, &domain.SpeakerExperience{}, &domain.Transaction{}, &domain.MidtransTransaction{}, &domain.Rating{}); err != nil {
 		return nil, err
 	}
 
